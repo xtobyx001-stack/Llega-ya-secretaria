@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secretaria WA — Llega Ya</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0f0d;
+    --surface: #111a14;
+    --surface2: #172010;
+    --green: #25d366;
+    --green2: #128c7e;
+    --green-glow: rgba(37,211,102,0.15);
+    --text: #e8f5e9;
+    --muted: #6b8c72;
+    --danger: #ff4d4d;
+    --warn: #ffb300;
+    --border: rgba(37,211,102,0.12);
+  }
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background: var(–bg);
+color: var(–text);
+font-family: ‘Syne’, sans-serif;
+min-height: 100vh;
+overflow-x: hidden;
+}
+
+/* Fondo animado */
+body::before {
+content: ‘’;
+position: fixed;
+inset: 0;
+background: radial-gradient(ellipse 60% 40% at 80% 10%, rgba(37,211,102,0.06) 0%, transparent 70%),
+radial-gradient(ellipse 40% 50% at 10% 80%, rgba(18,140,126,0.05) 0%, transparent 70%);
+pointer-events: none;
+z-index: 0;
+}
+
+.wrap {
+position: relative;
+z-index: 1;
+max-width: 860px;
+margin: 0 auto;
+padding: 32px 20px 60px;
+}
+
+/* HEADER */
+header {
+display: flex;
+align-items: center;
+gap: 14px;
+margin-bottom: 36px;
+}
+.logo-icon {
+width: 48px; height: 48px;
+background: var(–green);
+border-radius: 14px;
+display: flex; align-items: center; justify-content: center;
+font-size: 26px;
+box-shadow: 0 0 20px var(–green-glow);
+flex-shrink: 0;
+}
+header h1 { font-size: 22px; font-weight: 800; line-height: 1.1; }
+header h1 span { color: var(–green); }
+header p { font-size: 12px; color: var(–muted); margin-top: 3px; font-family: ‘DM Mono’, monospace; }
+
+/* CARDS */
+.card {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 24px;
+margin-bottom: 20px;
+}
+.card-title {
+font-size: 11px;
+font-family: ‘DM Mono’, monospace;
+color: var(–green);
+letter-spacing: 0.12em;
+text-transform: uppercase;
+margin-bottom: 16px;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.card-title::before {
+content: ‘’;
+width: 6px; height: 6px;
+background: var(–green);
+border-radius: 50%;
+display: block;
+}
+
+/* UPLOAD */
+.drop-zone {
+border: 2px dashed var(–border);
+border-radius: 12px;
+padding: 32px;
+text-align: center;
+cursor: pointer;
+transition: all 0.2s;
+position: relative;
+}
+.drop-zone:hover, .drop-zone.over {
+border-color: var(–green);
+background: var(–green-glow);
+}
+.drop-zone input[type=file] {
+position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+}
+.drop-icon { font-size: 36px; margin-bottom: 10px; }
+.drop-zone p { color: var(–muted); font-size: 14px; }
+.drop-zone strong { color: var(–green); }
+
+/* MENSAJE */
+.field label {
+display: block;
+font-size: 11px;
+font-family: ‘DM Mono’, monospace;
+color: var(–muted);
+margin-bottom: 8px;
+letter-spacing: 0.08em;
+}
+textarea, input[type=text], input[type=date] {
+width: 100%;
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 10px;
+color: var(–text);
+font-family: ‘DM Mono’, monospace;
+font-size: 13px;
+padding: 12px 14px;
+resize: vertical;
+outline: none;
+transition: border-color 0.2s;
+}
+textarea:focus, input:focus {
+border-color: var(–green);
+}
+textarea { min-height: 140px; line-height: 1.6; }
+
+.vars {
+display: flex;
+gap: 8px;
+flex-wrap: wrap;
+margin-top: 10px;
+}
+.var-tag {
+background: var(–surface2);
+border: 1px solid var(–border);
+border-radius: 6px;
+padding: 4px 10px;
+font-size: 11px;
+font-family: ‘DM Mono’, monospace;
+color: var(–green);
+cursor: pointer;
+transition: all 0.15s;
+}
+.var-tag:hover { background: var(–green-glow); border-color: var(–green); }
+
+/* FECHA */
+.fecha-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 14px;
+}
+
+/* DELAY */
+.delay-control {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.delay-control input[type=range] {
+flex: 1;
+accent-color: var(–green);
+height: 4px;
+padding: 0;
+border: none;
+background: transparent;
+}
+.delay-val {
+font-family: ‘DM Mono’, monospace;
+font-size: 18px;
+font-weight: 500;
+color: var(–green);
+min-width: 60px;
+text-align: right;
+}
+
+/* TABLA CONTACTOS */
+.contacts-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 12px;
+}
+.badge {
+background: var(–green-glow);
+border: 1px solid var(–border);
+border-radius: 20px;
+padding: 3px 10px;
+font-size: 11px;
+font-family: ‘DM Mono’, monospace;
+color: var(–green);
+}
+
+.table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(–border); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+thead { background: var(–surface2); }
+th {
+padding: 10px 14px;
+text-align: left;
+font-size: 10px;
+font-family: ‘DM Mono’, monospace;
+color: var(–muted);
+letter-spacing: 0.1em;
+text-transform: uppercase;
+border-bottom: 1px solid var(–border);
+}
+td {
+padding: 10px 14px;
+border-bottom: 1px solid rgba(37,211,102,0.05);
+font-family: ‘DM Mono’, monospace;
+font-size: 12px;
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+tr:last-child td { border-bottom: none; }
+tr.sent td { opacity: 0.4; }
+tr.sending td { background: rgba(37,211,102,0.08); }
+tr.error td { background: rgba(255,77,77,0.08); }
+
+.status-dot {
+width: 8px; height: 8px;
+border-radius: 50%;
+display: inline-block;
+background: var(–muted);
+}
+.status-dot.ok { background: var(–green); }
+.status-dot.sending { background: var(–warn); animation: pulse 0.8s infinite; }
+.status-dot.err { background: var(–danger); }
+
+@keyframes pulse {
+0%,100% { opacity: 1; } 50% { opacity: 0.3; }
+}
+
+/* PANEL DE CONTROL */
+.control-panel {
+background: var(–surface);
+border: 1px solid var(–border);
+border-radius: 16px;
+padding: 24px;
+position: sticky;
+bottom: 20px;
+display: flex;
+align-items: center;
+gap: 16px;
+flex-wrap: wrap;
+}
+
+.btn {
+border: none;
+border-radius: 10px;
+padding: 12px 24px;
+font-family: ‘Syne’, sans-serif;
+font-size: 14px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.2s;
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.btn-start {
+background: var(–green);
+color: #0a0f0d;
+box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+}
+.btn-start:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(37,211,102,0.4); }
+.btn-start:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+.btn-stop {
+background: transparent;
+color: var(–danger);
+border: 1px solid var(–danger);
+}
+.btn-stop:hover { background: rgba(255,77,77,0.1); }
+.btn-reset {
+background: transparent;
+color: var(–muted);
+border: 1px solid var(–border);
+}
+.btn-reset:hover { color: var(–text); border-color: var(–muted); }
+
+.progress-info {
+flex: 1;
+min-width: 160px;
+}
+.prog-label {
+font-size: 11px;
+font-family: ‘DM Mono’, monospace;
+color: var(–muted);
+margin-bottom: 6px;
+}
+.prog-bar-bg {
+height: 6px;
+background: var(–surface2);
+border-radius: 4px;
+overflow: hidden;
+}
+.prog-bar {
+height: 100%;
+background: var(–green);
+border-radius: 4px;
+transition: width 0.4s ease;
+width: 0%;
+}
+
+/* COUNTDOWN */
+.countdown {
+font-family: ‘DM Mono’, monospace;
+font-size: 28px;
+font-weight: 500;
+color: var(–green);
+letter-spacing: 0.05em;
+text-align: center;
+min-width: 80px;
+}
+
+/* EMPTY STATE */
+.empty {
+text-align: center;
+padding: 40px;
+color: var(–muted);
+font-size: 13px;
+font-family: ‘DM Mono’, monospace;
+}
+
+/* TOAST */
+.toast {
+position: fixed;
+bottom: 100px;
+left: 50%;
+transform: translateX(-50%) translateY(20px);
+background: var(–surface);
+border: 1px solid var(–green);
+border-radius: 10px;
+padding: 10px 20px;
+font-size: 13px;
+font-family: ‘DM Mono’, monospace;
+color: var(–green);
+opacity: 0;
+transition: all 0.3s;
+pointer-events: none;
+z-index: 999;
+white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.field + .field { margin-top: 16px; }
+
+@media (max-width: 600px) {
+.fecha-row { grid-template-columns: 1fr; }
+.control-panel { flex-direction: column; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+
+  <header>
+    <div class="logo-icon">📦</div>
+    <div>
+      <h1>Secretaria <span>WA</span></h1>
+      <p>Llega Ya | Aurel Pack — Automatización de mensajes</p>
+    </div>
+  </header>
+
+  <!-- CARGA EXCEL -->
+
+  <div class="card">
+    <div class="card-title">01 — Cargar archivo Excel</div>
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" accept=".xlsx,.xls">
+      <div class="drop-icon">📊</div>
+      <p>Arrastra tu Excel aquí o <strong>haz clic para seleccionar</strong></p>
+      <p style="margin-top:6px;font-size:11px;font-family:'DM Mono',monospace">Order_Report_2026-*.xlsx</p>
+    </div>
+  </div>
+
+  <!-- MENSAJE -->
+
+  <div class="card">
+    <div class="card-title">02 — Plantilla del mensaje</div>
+    <div class="field">
+      <label>MENSAJE (usa las variables de abajo)</label>
+      <textarea id="msgTemplate">Estimado/a {nombre},
+
+Es un placer confirmarle que su pedido fue procesado y está listo para entrega.
+
+Detalle de su pedido:
+{producto}
+
+La entrega está programada para {fecha}.
+
+Nos encantaría que nos comparta su ubicación para coordinar la entrega.</textarea>
+</div>
+<div class="vars">
+<div class="var-tag" onclick="insertVar('{nombre}')">📛 {nombre}</div>
+<div class="var-tag" onclick="insertVar('{producto}')">📦 {producto}</div>
+<div class="var-tag" onclick="insertVar('{fecha}')">📅 {fecha}</div>
+</div>
+<div class="field" style="margin-top:18px;">
+<label>FECHA DE ENTREGA</label>
+<input type="date" id="fechaEntrega">
+</div>
+
+  </div>
+
+  <!-- DELAY -->
+
+  <div class="card">
+    <div class="card-title">03 — Intervalo entre mensajes</div>
+    <div class="delay-control">
+      <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">30s</span>
+      <input type="range" id="delaySlider" min="30" max="300" value="120" step="10">
+      <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">5min</span>
+      <div class="delay-val" id="delayVal">2:00 min</div>
+    </div>
+  </div>
+
+  <!-- TABLA CONTACTOS -->
+
+  <div class="card" id="contactsCard" style="display:none">
+    <div class="card-title">
+      04 — Contactos cargados
+      <div style="margin-left:auto" id="countBadge" class="badge">0 pedidos</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Teléfono</th>
+            <th>Producto</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody id="contactsBody"></tbody>
+      </table>
+    </div>
+    <div id="emptyState" class="empty" style="display:none">Sin contactos cargados</div>
+  </div>
+
+  <!-- PANEL CONTROL -->
+
+  <div class="control-panel" id="controlPanel">
+    <div class="countdown" id="countdown">--:--</div>
+    <div class="progress-info">
+      <div class="prog-label" id="progLabel">Esperando inicio...</div>
+      <div class="prog-bar-bg"><div class="prog-bar" id="progBar"></div></div>
+    </div>
+    <button class="btn btn-reset" onclick="resetAll()">↺ Reset</button>
+    <button class="btn btn-stop" onclick="stopQueue()" id="btnStop" style="display:none">⏹ Pausar</button>
+    <button class="btn btn-start" onclick="startQueue()" id="btnStart" disabled>▶ Iniciar envío</button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let contacts = [];
+let currentIdx = 0;
+let running = false;
+let timer = null;
+let countdownTimer = null;
+let remaining = 0;
+
+// SLIDER DELAY
+const slider = document.getElementById('delaySlider');
+const delayVal = document.getElementById('delayVal');
+slider.addEventListener('input', () => {
+  const s = parseInt(slider.value);
+  const m = Math.floor(s/60), sec = s%60;
+  delayVal.textContent = `${m}:${sec.toString().padStart(2,'0')} min`;
+});
+
+// FECHA DEFAULT (mañana)
+const fechaInput = document.getElementById('fechaEntrega');
+const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
+fechaInput.value = tomorrow.toISOString().split('T')[0];
+
+// DROP ZONE
+const dropZone = document.getElementById('dropZone');
+const fileInput = document.getElementById('fileInput');
+
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('over');
+  const file = e.dataTransfer.files[0];
+  if(file) processFile(file);
+});
+fileInput.addEventListener('change', () => {
+  if(fileInput.files[0]) processFile(fileInput.files[0]);
+});
+
+function processFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    const wb = XLSX.read(e.target.result, {type:'binary'});
+    const ws = wb.Sheets[wb.SheetNames[0]];
+    const data = XLSX.utils.sheet_to_json(ws, {header:1});
+
+    // Buscar fila de encabezados
+    let headerRow = -1;
+    for(let i=0;i<data.length;i++){
+      if(data[i] && data[i].some(c => String(c||'').toLowerCase().includes('customer') || String(c||'').toLowerCase().includes('dropoff contact name'))){
+        headerRow = i; break;
+      }
+    }
+    if(headerRow === -1){ showToast('❌ No se encontraron columnas válidas'); return; }
+
+    const headers = data[headerRow].map(h => String(h||'').trim());
+    const nameIdx = headers.findIndex(h => h.toLowerCase().includes('dropoff contact name'));
+    const phoneIdx = headers.findIndex(h => h.toLowerCase().includes('dropoff contact') && !h.toLowerCase().includes('name'));
+    const noteIdx = headers.findIndex(h => h.toLowerCase() === 'note');
+
+    contacts = [];
+    for(let i=headerRow+1;i<data.length;i++){
+      const row = data[i];
+      if(!row || !row[phoneIdx]) continue;
+      const phone = String(row[phoneIdx]||'').replace(/\D/g,'');
+      const name = String(row[nameIdx]||'').trim();
+      const product = String(row[noteIdx]||'').trim();
+      if(phone.length >= 8 && name){
+        contacts.push({ name, phone, product, status: 'pending' });
+      }
+    }
+
+    renderTable();
+    document.getElementById('contactsCard').style.display = 'block';
+    document.getElementById('btnStart').disabled = contacts.length === 0;
+    document.getElementById('countBadge').textContent = `${contacts.length} pedidos`;
+    dropZone.querySelector('p').innerHTML = `✅ <strong>${file.name}</strong> — ${contacts.length} contactos`;
+    showToast(`✅ ${contacts.length} contactos cargados`);
+  };
+  reader.readAsBinaryString(file);
+}
+
+function renderTable() {
+  const tbody = document.getElementById('contactsBody');
+  tbody.innerHTML = '';
+  contacts.forEach((c, i) => {
+    const tr = document.createElement('tr');
+    tr.id = `row-${i}`;
+    if(c.status === 'sent') tr.classList.add('sent');
+    if(c.status === 'sending') tr.classList.add('sending');
+    if(c.status === 'error') tr.classList.add('error');
+
+    const dotClass = c.status === 'sent' ? 'ok' : c.status === 'sending' ? 'sending' : c.status === 'error' ? 'err' : '';
+    tr.innerHTML = `
+      <td style="color:var(--muted)">${i+1}</td>
+      <td title="${c.name}">${c.name}</td>
+      <td>+${c.phone}</td>
+      <td title="${c.product}">${c.product.substring(0,30)}${c.product.length>30?'…':''}</td>
+      <td><span class="status-dot ${dotClass}"></span></td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function buildMessage(contact) {
+  const fechaRaw = fechaInput.value;
+  let fechaStr = '';
+  if(fechaRaw) {
+    const d = new Date(fechaRaw + 'T12:00:00');
+    fechaStr = d.toLocaleDateString('es-DO', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+  }
+  return document.getElementById('msgTemplate').value
+    .replace(/{nombre}/g, contact.name)
+    .replace(/{producto}/g, contact.product)
+    .replace(/{fecha}/g, fechaStr);
+}
+
+function startQueue() {
+  if(contacts.length === 0) return;
+  running = true;
+  document.getElementById('btnStart').style.display = 'none';
+  document.getElementById('btnStop').style.display = 'flex';
+  sendNext();
+}
+
+function stopQueue() {
+  running = false;
+  clearTimeout(timer);
+  clearInterval(countdownTimer);
+  document.getElementById('btnStart').style.display = 'flex';
+  document.getElementById('btnStop').style.display = 'none';
+  document.getElementById('countdown').textContent = '--:--';
+  document.getElementById('progLabel').textContent = 'Pausado';
+  showToast('⏸ Cola pausada');
+}
+
+function sendNext() {
+  // Buscar próximo pendiente
+  while(currentIdx < contacts.length && contacts[currentIdx].status !== 'pending') {
+    currentIdx++;
+  }
+  if(currentIdx >= contacts.length) {
+    running = false;
+    document.getElementById('btnStart').style.display = 'flex';
+    document.getElementById('btnStop').style.display = 'none';
+    document.getElementById('countdown').textContent = '✅';
+    document.getElementById('progLabel').textContent = `Completado — ${contacts.filter(c=>c.status==='sent').length} enviados`;
+    showToast('🎉 Todos los mensajes enviados');
+    return;
+  }
+
+  const contact = contacts[currentIdx];
+  contact.status = 'sending';
+  renderTable();
+
+  // Scroll al contacto actual
+  const row = document.getElementById(`row-${currentIdx}`);
+  if(row) row.scrollIntoView({ behavior:'smooth', block:'nearest' });
+
+  const msg = buildMessage(contact);
+  const encoded = encodeURIComponent(msg);
+  const phone = contact.phone.startsWith('1') ? contact.phone : '1' + contact.phone;
+  const waUrl = `https://wa.me/${phone}?text=${encoded}`;
+
+  // Abrir WhatsApp
+  window.open(waUrl, '_blank');
+
+  updateProgress();
+  showToast(`📤 Enviando a ${contact.name}...`);
+
+  const delay = parseInt(slider.value) * 1000;
+  startCountdown(delay / 1000);
+
+  timer = setTimeout(() => {
+    contact.status = 'sent';
+    currentIdx++;
+    renderTable();
+    updateProgress();
+    if(running) sendNext();
+  }, delay);
+}
+
+function startCountdown(seconds) {
+  clearInterval(countdownTimer);
+  remaining = seconds;
+  updateCountdownDisplay();
+  countdownTimer = setInterval(() => {
+    remaining--;
+    if(remaining <= 0) { clearInterval(countdownTimer); return; }
+    updateCountdownDisplay();
+  }, 1000);
+}
+
+function updateCountdownDisplay() {
+  const m = Math.floor(remaining/60);
+  const s = remaining % 60;
+  document.getElementById('countdown').textContent = `${m}:${s.toString().padStart(2,'0')}`;
+}
+
+function updateProgress() {
+  const sent = contacts.filter(c => c.status === 'sent').length;
+  const total = contacts.length;
+  const pct = total > 0 ? (sent/total)*100 : 0;
+  document.getElementById('progBar').style.width = pct + '%';
+  const next = contacts.find((c,i) => i > currentIdx-1 && c.status === 'pending');
+  document.getElementById('progLabel').textContent = `${sent} / ${total} enviados${next ? ` — próx: ${contacts[currentIdx]?.name||''}` : ''}`;
+}
+
+function resetAll() {
+  stopQueue();
+  currentIdx = 0;
+  contacts.forEach(c => c.status = 'pending');
+  renderTable();
+  document.getElementById('progBar').style.width = '0%';
+  document.getElementById('progLabel').textContent = 'Esperando inicio...';
+  document.getElementById('countdown').textContent = '--:--';
+  showToast('↺ Cola reiniciada');
+}
+
+function insertVar(v) {
+  const ta = document.getElementById('msgTemplate');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  ta.value = ta.value.substring(0,start) + v + ta.value.substring(end);
+  ta.focus();
+  ta.setSelectionRange(start+v.length, start+v.length);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+
+</body>
+</html>
