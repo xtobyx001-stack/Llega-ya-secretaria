@@ -633,10 +633,14 @@ function sendNext() {
   const msg = buildMessage(contact);
   const encoded = encodeURIComponent(msg);
   const phone = contact.phone.startsWith('1') ? contact.phone : '1' + contact.phone;
-  const waUrl = `https://wa.me/${phone}?text=${encoded}`;
+  const waUrl = `whatsapp://send?phone=${phone}&text=${encoded}`;
 
-  // Abrir WhatsApp
-  window.open(waUrl, '_blank');
+  // Abrir WhatsApp sin perder el estado de la página
+  const iframe = document.createElement('iframe');
+  iframe.style.display = 'none';
+  iframe.src = waUrl;
+  document.body.appendChild(iframe);
+  setTimeout(() => document.body.removeChild(iframe), 3000);
 
   updateProgress();
   showToast(`📤 Enviando a ${contact.name}...`);
