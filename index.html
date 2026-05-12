@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="dark">
 <meta name="supported-color-schemes" content="dark">
-<title>Secretaria WA — Llega Ya</title>
+<title>Secretaria WA - Llega Ya</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
@@ -371,21 +371,21 @@ white-space: nowrap;
   <!-- HEADER -->
 
   <header>
-    <div class="logo-icon">📦</div>
+    <div class="logo-icon">[WA]</div>
     <div>
       <h1>Secretaria <span>WA</span></h1>
-      <p>Llega Ya | Aurel Pack — Automatización de mensajes</p>
+      <p>Llega Ya | Aurel Pack - Automatizacion de mensajes</p>
     </div>
   </header>
 
   <!-- CARGA EXCEL -->
 
   <div class="card">
-    <div class="card-title">01 — Cargar archivo Excel</div>
+    <div class="card-title">01 - Cargar archivo Excel</div>
     <div class="drop-zone" id="dropZone">
       <input type="file" id="fileInput" accept=".xlsx,.xls">
-      <div class="drop-icon">📊</div>
-      <p>Arrastra tu Excel aquí o <strong>haz clic para seleccionar</strong></p>
+      <div class="drop-icon">[XLS]</div>
+      <p>Arrastra tu Excel aqui o <strong>haz clic para seleccionar</strong></p>
       <p style="margin-top:6px;font-size:11px;font-family:'DM Mono',monospace">Order_Report_2026-*.xlsx</p>
     </div>
   </div>
@@ -393,24 +393,24 @@ white-space: nowrap;
   <!-- MENSAJE -->
 
   <div class="card">
-    <div class="card-title">02 — Plantilla del mensaje</div>
+    <div class="card-title">02 - Plantilla del mensaje</div>
     <div class="field">
       <label>MENSAJE (usa las variables de abajo)</label>
       <textarea id="msgTemplate">Estimado/a {nombre},
 
-Es un placer confirmarle que su pedido fue procesado y está listo para entrega.
+Es un placer confirmarle que su pedido fue procesado y esta listo para entrega.
 
 Detalle de su pedido:
 {producto}
 
-La entrega está programada para {fecha}.
+La entrega esta programada para {fecha}.
 
-Nos encantaría que nos comparta su ubicación para coordinar la entrega.</textarea>
+Nos encantaria que nos comparta su ubicacion para coordinar la entrega.</textarea>
 </div>
 <div class="vars">
-<div class="var-tag" onclick="insertVar('{nombre}')">📛 {nombre}</div>
-<div class="var-tag" onclick="insertVar('{producto}')">📦 {producto}</div>
-<div class="var-tag" onclick="insertVar('{fecha}')">📅 {fecha}</div>
+<div class="var-tag" onclick="insertVar('{nombre}')">[N] {nombre}</div>
+<div class="var-tag" onclick="insertVar('{producto}')">[WA] {producto}</div>
+<div class="var-tag" onclick="insertVar('{fecha}')">[F] {fecha}</div>
 </div>
 <div class="field" style="margin-top:18px;">
 <label>FECHA DE ENTREGA</label>
@@ -422,7 +422,7 @@ Nos encantaría que nos comparta su ubicación para coordinar la entrega.</texta
   <!-- DELAY -->
 
   <div class="card">
-    <div class="card-title">03 — Intervalo entre mensajes</div>
+    <div class="card-title">03 - Intervalo entre mensajes</div>
     <div class="delay-control">
       <span style="font-size:13px;color:#6b8c72;font-family:'DM Mono',monospace">30s</span>
       <input type="range" id="delaySlider" min="30" max="300" value="120" step="10">
@@ -435,7 +435,7 @@ Nos encantaría que nos comparta su ubicación para coordinar la entrega.</texta
 
   <div class="card" id="contactsCard" style="display:none">
     <div class="card-title">
-      04 — Contactos cargados
+      04 - Contactos cargados
       <div style="margin-left:auto" id="countBadge" class="badge">0 pedidos</div>
     </div>
     <div class="table-wrap">
@@ -444,7 +444,7 @@ Nos encantaría que nos comparta su ubicación para coordinar la entrega.</texta
           <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Teléfono</th>
+            <th>Telefono</th>
             <th>Producto</th>
             <th>Estado</th>
           </tr>
@@ -463,9 +463,9 @@ Nos encantaría que nos comparta su ubicación para coordinar la entrega.</texta
       <div class="prog-label" id="progLabel">Esperando inicio...</div>
       <div class="prog-bar-bg"><div class="prog-bar" id="progBar"></div></div>
     </div>
-    <button class="btn btn-reset" onclick="resetAll()">↺ Reset</button>
-    <button class="btn btn-stop" onclick="stopQueue()" id="btnStop" style="display:none">⏹ Pausar</button>
-    <button class="btn btn-start" onclick="startQueue()" id="btnStart" disabled>▶ Iniciar envío</button>
+    <button class="btn btn-reset" onclick="resetAll()">[R] Reset</button>
+    <button class="btn btn-stop" onclick="stopQueue()" id="btnStop" style="display:none">[x] Pausar</button>
+    <button class="btn btn-start" onclick="startQueue()" id="btnStart" disabled>[>] Iniciar envio</button>
   </div>
 
 </div>
@@ -489,7 +489,7 @@ slider.addEventListener('input', () => {
   delayVal.textContent = `${m}:${sec.toString().padStart(2,'0')} min`;
 });
 
-// FECHA DEFAULT (mañana)
+// FECHA DEFAULT (manana)
 const fechaInput = document.getElementById('fechaEntrega');
 const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate()+1);
 fechaInput.value = tomorrow.toISOString().split('T')[0];
@@ -524,7 +524,7 @@ function processFile(file) {
         headerRow = i; break;
       }
     }
-    if(headerRow === -1){ showToast('❌ No se encontraron columnas válidas'); return; }
+    if(headerRow === -1){ showToast('[X] No se encontraron columnas validas'); return; }
 
     const headers = data[headerRow].map(h => String(h||'').trim());
     const nameIdx = headers.findIndex(h => h.toLowerCase().includes('dropoff contact name'));
@@ -547,8 +547,8 @@ function processFile(file) {
     document.getElementById('contactsCard').style.display = 'block';
     document.getElementById('btnStart').disabled = contacts.length === 0;
     document.getElementById('countBadge').textContent = `${contacts.length} pedidos`;
-    dropZone.querySelector('p').innerHTML = `✅ <strong>${file.name}</strong> — ${contacts.length} contactos`;
-    showToast(`✅ ${contacts.length} contactos cargados`);
+    dropZone.querySelector('p').innerHTML = `[OK] <strong>${file.name}</strong> - ${contacts.length} contactos`;
+    showToast(`[OK] ${contacts.length} contactos cargados`);
   };
   reader.readAsBinaryString(file);
 }
@@ -568,7 +568,7 @@ function renderTable() {
       <td style="color:#6b8c72">${i+1}</td>
       <td title="${c.name}">${c.name}</td>
       <td>+${c.phone}</td>
-      <td title="${c.product}">${c.product.substring(0,30)}${c.product.length>30?'…':''}</td>
+      <td title="${c.product}">${c.product.substring(0,30)}${c.product.length>30?'...':''}</td>
       <td><span class="status-dot ${dotClass}"></span></td>
     `;
     tbody.appendChild(tr);
@@ -604,11 +604,11 @@ function stopQueue() {
   document.getElementById('btnStop').style.display = 'none';
   document.getElementById('countdown').textContent = '--:--';
   document.getElementById('progLabel').textContent = 'Pausado';
-  showToast('⏸ Cola pausada');
+  showToast('[||] Cola pausada');
 }
 
 function sendNext() {
-  // Buscar próximo pendiente
+  // Buscar proximo pendiente
   while(currentIdx < contacts.length && contacts[currentIdx].status !== 'pending') {
     currentIdx++;
   }
@@ -616,9 +616,9 @@ function sendNext() {
     running = false;
     document.getElementById('btnStart').style.display = 'flex';
     document.getElementById('btnStop').style.display = 'none';
-    document.getElementById('countdown').textContent = '✅';
-    document.getElementById('progLabel').textContent = `Completado — ${contacts.filter(c=>c.status==='sent').length} enviados`;
-    showToast('🎉 Todos los mensajes enviados');
+    document.getElementById('countdown').textContent = '[OK]';
+    document.getElementById('progLabel').textContent = `Completado - ${contacts.filter(c=>c.status==='sent').length} enviados`;
+    showToast('[!] Todos los mensajes enviados');
     return;
   }
 
@@ -633,17 +633,13 @@ function sendNext() {
   const msg = buildMessage(contact);
   const encoded = encodeURIComponent(msg);
   const phone = contact.phone.startsWith('1') ? contact.phone : '1' + contact.phone;
-  const waUrl = `whatsapp://send?phone=${phone}&text=${encoded}`;
+  const waUrl = `https://wa.me/${phone}?text=${encoded}`;
 
-  // Abrir WhatsApp sin perder el estado de la página
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = waUrl;
-  document.body.appendChild(iframe);
-  setTimeout(() => document.body.removeChild(iframe), 3000);
+  // Abrir WhatsApp
+  window.open(waUrl, '_blank');
 
   updateProgress();
-  showToast(`📤 Enviando a ${contact.name}...`);
+  showToast(`[>] Enviando a ${contact.name}...`);
 
   const delay = parseInt(slider.value) * 1000;
   startCountdown(delay / 1000);
@@ -680,7 +676,7 @@ function updateProgress() {
   const pct = total > 0 ? (sent/total)*100 : 0;
   document.getElementById('progBar').style.width = pct + '%';
   const next = contacts.find((c,i) => i > currentIdx-1 && c.status === 'pending');
-  document.getElementById('progLabel').textContent = `${sent} / ${total} enviados${next ? ` — próx: ${contacts[currentIdx]?.name||''}` : ''}`;
+  document.getElementById('progLabel').textContent = `${sent} / ${total} enviados${next ? ` - prox: ${contacts[currentIdx]?.name||''}` : ''}`;
 }
 
 function resetAll() {
@@ -691,7 +687,7 @@ function resetAll() {
   document.getElementById('progBar').style.width = '0%';
   document.getElementById('progLabel').textContent = 'Esperando inicio...';
   document.getElementById('countdown').textContent = '--:--';
-  showToast('↺ Cola reiniciada');
+  showToast('[R] Cola reiniciada');
 }
 
 function insertVar(v) {
