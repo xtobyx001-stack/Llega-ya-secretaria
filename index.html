@@ -4,32 +4,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="supported-color-schemes" content="dark">
 <title>Secretaria WA — Llega Ya</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-  :root {
-    --bg: #0a0f0d;
-    --surface: #111a14;
-    --surface2: #172010;
-    --green: #25d366;
-    --green2: #128c7e;
-    --green-glow: rgba(37,211,102,0.15);
-    --text: #e8f5e9;
-    --muted: #6b8c72;
-    --danger: #ff4d4d;
-    --warn: #ffb300;
-    --border: rgba(37,211,102,0.12);
-  }
+  * { box-sizing: border-box !important; margin: 0 !important; padding: 0 !important; }
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-background: var(–bg);
-color: var(–text);
-font-family: ‘Syne’, sans-serif;
-min-height: 100vh;
-overflow-x: hidden;
+html, body {
+background: #0a0f0d !important;
+background-color: #0a0f0d !important;
+color: #e8f5e9 !important;
+font-family: ‘Syne’, sans-serif !important;
+min-height: 100vh !important;
+overflow-x: hidden !important;
+-webkit-text-size-adjust: 100% !important;
 }
 
 /* Fondo animado */
@@ -60,21 +50,21 @@ margin-bottom: 36px;
 }
 .logo-icon {
 width: 48px; height: 48px;
-background: var(–green);
+background: #25d366;
 border-radius: 14px;
 display: flex; align-items: center; justify-content: center;
 font-size: 26px;
-box-shadow: 0 0 20px var(–green-glow);
+box-shadow: 0 0 20px rgba(37,211,102,0.15);
 flex-shrink: 0;
 }
 header h1 { font-size: 22px; font-weight: 800; line-height: 1.1; }
-header h1 span { color: var(–green); }
-header p { font-size: 12px; color: var(–muted); margin-top: 3px; font-family: ‘DM Mono’, monospace; }
+header h1 span { color: #25d366; }
+header p { font-size: 12px; color: #6b8c72; margin-top: 3px; font-family: ‘DM Mono’, monospace; }
 
 /* CARDS */
 .card {
-background: var(–surface);
-border: 1px solid var(–border);
+background: #111a14;
+border: 1px solid rgba(37,211,102,0.12);
 border-radius: 16px;
 padding: 24px;
 margin-bottom: 20px;
@@ -82,7 +72,7 @@ margin-bottom: 20px;
 .card-title {
 font-size: 11px;
 font-family: ‘DM Mono’, monospace;
-color: var(–green);
+color: #25d366;
 letter-spacing: 0.12em;
 text-transform: uppercase;
 margin-bottom: 16px;
@@ -93,14 +83,14 @@ gap: 8px;
 .card-title::before {
 content: ‘’;
 width: 6px; height: 6px;
-background: var(–green);
+background: #25d366;
 border-radius: 50%;
 display: block;
 }
 
 /* UPLOAD */
 .drop-zone {
-border: 2px dashed var(–border);
+border: 2px dashed rgba(37,211,102,0.12);
 border-radius: 12px;
 padding: 32px;
 text-align: center;
@@ -109,31 +99,31 @@ transition: all 0.2s;
 position: relative;
 }
 .drop-zone:hover, .drop-zone.over {
-border-color: var(–green);
-background: var(–green-glow);
+border-color: #25d366;
+background: rgba(37,211,102,0.15);
 }
 .drop-zone input[type=file] {
 position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
 }
 .drop-icon { font-size: 36px; margin-bottom: 10px; }
-.drop-zone p { color: var(–muted); font-size: 14px; }
-.drop-zone strong { color: var(–green); }
+.drop-zone p { color: #6b8c72; font-size: 14px; }
+.drop-zone strong { color: #25d366; }
 
 /* MENSAJE */
 .field label {
 display: block;
 font-size: 11px;
 font-family: ‘DM Mono’, monospace;
-color: var(–muted);
+color: #6b8c72;
 margin-bottom: 8px;
 letter-spacing: 0.08em;
 }
 textarea, input[type=text], input[type=date] {
 width: 100%;
-background: var(–surface2);
-border: 1px solid var(–border);
+background: #172010;
+border: 1px solid rgba(37,211,102,0.12);
 border-radius: 10px;
-color: var(–text);
+color: #e8f5e9;
 font-family: ‘DM Mono’, monospace;
 font-size: 13px;
 padding: 12px 14px;
@@ -142,7 +132,7 @@ outline: none;
 transition: border-color 0.2s;
 }
 textarea:focus, input:focus {
-border-color: var(–green);
+border-color: #25d366;
 }
 textarea { min-height: 140px; line-height: 1.6; }
 
@@ -153,17 +143,17 @@ flex-wrap: wrap;
 margin-top: 10px;
 }
 .var-tag {
-background: var(–surface2);
-border: 1px solid var(–border);
+background: #172010;
+border: 1px solid rgba(37,211,102,0.12);
 border-radius: 6px;
 padding: 4px 10px;
 font-size: 11px;
 font-family: ‘DM Mono’, monospace;
-color: var(–green);
+color: #25d366;
 cursor: pointer;
 transition: all 0.15s;
 }
-.var-tag:hover { background: var(–green-glow); border-color: var(–green); }
+.var-tag:hover { background: rgba(37,211,102,0.15); border-color: #25d366; }
 
 /* FECHA */
 .fecha-row {
@@ -180,7 +170,7 @@ gap: 12px;
 }
 .delay-control input[type=range] {
 flex: 1;
-accent-color: var(–green);
+accent-color: #25d366;
 height: 4px;
 padding: 0;
 border: none;
@@ -190,7 +180,7 @@ background: transparent;
 font-family: ‘DM Mono’, monospace;
 font-size: 18px;
 font-weight: 500;
-color: var(–green);
+color: #25d366;
 min-width: 60px;
 text-align: right;
 }
@@ -203,27 +193,27 @@ align-items: center;
 margin-bottom: 12px;
 }
 .badge {
-background: var(–green-glow);
-border: 1px solid var(–border);
+background: rgba(37,211,102,0.15);
+border: 1px solid rgba(37,211,102,0.12);
 border-radius: 20px;
 padding: 3px 10px;
 font-size: 11px;
 font-family: ‘DM Mono’, monospace;
-color: var(–green);
+color: #25d366;
 }
 
-.table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(–border); }
+.table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid rgba(37,211,102,0.12); }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead { background: var(–surface2); }
+thead { background: #172010; }
 th {
 padding: 10px 14px;
 text-align: left;
 font-size: 10px;
 font-family: ‘DM Mono’, monospace;
-color: var(–muted);
+color: #6b8c72;
 letter-spacing: 0.1em;
 text-transform: uppercase;
-border-bottom: 1px solid var(–border);
+border-bottom: 1px solid rgba(37,211,102,0.12);
 }
 td {
 padding: 10px 14px;
@@ -244,11 +234,11 @@ tr.error td { background: rgba(255,77,77,0.08); }
 width: 8px; height: 8px;
 border-radius: 50%;
 display: inline-block;
-background: var(–muted);
+background: #6b8c72;
 }
-.status-dot.ok { background: var(–green); }
-.status-dot.sending { background: var(–warn); animation: pulse 0.8s infinite; }
-.status-dot.err { background: var(–danger); }
+.status-dot.ok { background: #25d366; }
+.status-dot.sending { background: #ffb300; animation: pulse 0.8s infinite; }
+.status-dot.err { background: #ff4d4d; }
 
 @keyframes pulse {
 0%,100% { opacity: 1; } 50% { opacity: 0.3; }
@@ -256,8 +246,8 @@ background: var(–muted);
 
 /* PANEL DE CONTROL */
 .control-panel {
-background: var(–surface);
-border: 1px solid var(–border);
+background: #111a14;
+border: 1px solid rgba(37,211,102,0.12);
 border-radius: 16px;
 padding: 24px;
 position: sticky;
@@ -282,7 +272,7 @@ align-items: center;
 gap: 8px;
 }
 .btn-start {
-background: var(–green);
+background: #25d366;
 color: #0a0f0d;
 box-shadow: 0 4px 20px rgba(37,211,102,0.3);
 }
@@ -290,16 +280,16 @@ box-shadow: 0 4px 20px rgba(37,211,102,0.3);
 .btn-start:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 .btn-stop {
 background: transparent;
-color: var(–danger);
-border: 1px solid var(–danger);
+color: #ff4d4d;
+border: 1px solid #ff4d4d;
 }
 .btn-stop:hover { background: rgba(255,77,77,0.1); }
 .btn-reset {
 background: transparent;
-color: var(–muted);
-border: 1px solid var(–border);
+color: #6b8c72;
+border: 1px solid rgba(37,211,102,0.12);
 }
-.btn-reset:hover { color: var(–text); border-color: var(–muted); }
+.btn-reset:hover { color: #e8f5e9; border-color: #6b8c72; }
 
 .progress-info {
 flex: 1;
@@ -308,18 +298,18 @@ min-width: 160px;
 .prog-label {
 font-size: 11px;
 font-family: ‘DM Mono’, monospace;
-color: var(–muted);
+color: #6b8c72;
 margin-bottom: 6px;
 }
 .prog-bar-bg {
 height: 6px;
-background: var(–surface2);
+background: #172010;
 border-radius: 4px;
 overflow: hidden;
 }
 .prog-bar {
 height: 100%;
-background: var(–green);
+background: #25d366;
 border-radius: 4px;
 transition: width 0.4s ease;
 width: 0%;
@@ -330,7 +320,7 @@ width: 0%;
 font-family: ‘DM Mono’, monospace;
 font-size: 28px;
 font-weight: 500;
-color: var(–green);
+color: #25d366;
 letter-spacing: 0.05em;
 text-align: center;
 min-width: 80px;
@@ -340,7 +330,7 @@ min-width: 80px;
 .empty {
 text-align: center;
 padding: 40px;
-color: var(–muted);
+color: #6b8c72;
 font-size: 13px;
 font-family: ‘DM Mono’, monospace;
 }
@@ -351,13 +341,13 @@ position: fixed;
 bottom: 100px;
 left: 50%;
 transform: translateX(-50%) translateY(20px);
-background: var(–surface);
-border: 1px solid var(–green);
+background: #111a14;
+border: 1px solid #25d366;
 border-radius: 10px;
 padding: 10px 20px;
 font-size: 13px;
 font-family: ‘DM Mono’, monospace;
-color: var(–green);
+color: #25d366;
 opacity: 0;
 transition: all 0.3s;
 pointer-events: none;
@@ -434,9 +424,9 @@ Nos encantaría que nos comparta su ubicación para coordinar la entrega.</texta
   <div class="card">
     <div class="card-title">03 — Intervalo entre mensajes</div>
     <div class="delay-control">
-      <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">30s</span>
+      <span style="font-size:13px;color:#6b8c72;font-family:'DM Mono',monospace">30s</span>
       <input type="range" id="delaySlider" min="30" max="300" value="120" step="10">
-      <span style="font-size:13px;color:var(--muted);font-family:'DM Mono',monospace">5min</span>
+      <span style="font-size:13px;color:#6b8c72;font-family:'DM Mono',monospace">5min</span>
       <div class="delay-val" id="delayVal">2:00 min</div>
     </div>
   </div>
@@ -575,7 +565,7 @@ function renderTable() {
 
     const dotClass = c.status === 'sent' ? 'ok' : c.status === 'sending' ? 'sending' : c.status === 'error' ? 'err' : '';
     tr.innerHTML = `
-      <td style="color:var(--muted)">${i+1}</td>
+      <td style="color:#6b8c72">${i+1}</td>
       <td title="${c.name}">${c.name}</td>
       <td>+${c.phone}</td>
       <td title="${c.product}">${c.product.substring(0,30)}${c.product.length>30?'…':''}</td>
