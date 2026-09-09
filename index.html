@@ -857,7 +857,7 @@ function getRouteData() {
     if (currentRouteTab === 'pendientes') return data.filter(p => (p.status === 'pending' || p.status === 'in_process' || p.status === 'in_transit') && hasCoords(p));
     if (currentRouteTab === 'sin_ubicacion') return data.filter(p => (p.status === 'pending' || p.status === 'in_process' || p.status === 'in_transit') && !hasCoords(p));
     if (currentRouteTab === 'completados') return data.filter(p => p.status === 'no_answer' || p.status === 'returned');
-    if (currentRouteTab === 'exportar') return data.filter(p => p.status === 'delivered');
+    if (currentRouteTab === 'exportar') return data.filter(p => p.status !== 'delivered' && p.status !== 'delivered_unmarked' && p.status !== 'cancelled'); return data.filter(p => p.status === 'delivered');
     return [];
 }
 function renderRouteView() {
