@@ -334,6 +334,24 @@ body { flex-wrap:wrap; }
 .pd-value { font-size:.92em; }
 .pd-actions { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
 .pd-actions button, .pd-actions a { min-width:0; border-radius:16px; }
+/* ===== SKIN 2.0 — ESPACIO Y BOTONES UNIFICADOS (10.2) ===== */
+body:has(#view-daydetail.active) .main-content, body:has(#view-packdetail.active) .main-content { min-height:auto; padding-bottom:0; }
+button { box-shadow:none; }
+.btn-deliver { background:#ECFDF5; color:#047857; border:1px solid #A7F3D0; }
+.btn-postpone { background:#FFFBEB; color:#B45309; border:1px solid #FDE68A; }
+.btn-cancel, .btn-danger { background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; }
+.btn-secondary { background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; }
+.btn-ghost { background:#F1F5F9; color:#334155; border:1px solid #E2E8F0; }
+.pd-actions a, .pd-actions button { text-decoration:none; }
+.pd-actions a.btn-secondary { color:#1D4ED8; }
+.pd-actions a.btn-cancel { color:#B91C1C; }
+.pd-actions a.btn-ghost { color:#334155; }
+.pd-actions button[style*="0ea5e9"] { background:#E0F2FE !important; color:#0369A1 !important; border:1px solid #7DD3FC !important; }
+.pkg-actions .btn-deliver, .pd-actions .btn-deliver, .import-actions .btn-deliver, .draft-actions .btn-deliver { background:#ECFDF5; color:#047857; border:1px solid #A7F3D0; }
+.pkg-actions .btn-postpone, .pd-actions .btn-postpone { background:#FFFBEB; color:#B45309; border:1px solid #FDE68A; }
+.pkg-actions .btn-cancel, .pd-actions .btn-cancel { background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; }
+.pkg-actions .btn-secondary, .pd-actions .btn-secondary { background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; }
+.pkg-actions .btn-ghost, .pd-actions .btn-ghost { background:#F1F5F9; color:#334155; border:1px solid #E2E8F0; }
 </style>
 </head>
 <body>
