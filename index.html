@@ -1332,25 +1332,6 @@ function setupTopButtons() {
 }
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', setupTopButtons); } else { setupTopButtons(); }
 setTimeout(setupTopButtons, 500);
-// ===== BOTÓN ACTUALIZAR =====
-function forceRefresh() { notify('🔄 Actualizando...'); if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) { navigator.serviceWorker.getRegistration().then(function(reg) { if (reg) reg.update(); setTimeout(function() { location.reload(); }, 300); }).catch(function() { location.reload(); }); } else { location.reload(); } }
-// ===== BOTONES DERECHA AUTO-ARMABLES =====
-function setupTopButtons() {
-  var topbar = document.querySelector('.topbar'); if (!topbar) return;
-  var theme = document.getElementById('themeToggle');
-  var existingRefresh = topbar.querySelector('[onclick="forceRefresh()"]');
-  var right = null;
-  if (theme && existingRefresh && theme.parentElement === existingRefresh.parentElement) right = theme.parentElement;
-  if (!right) { right = document.createElement('div'); right.style.cssText = 'display:flex;align-items:center;gap:10px;'; topbar.appendChild(right); }
-  var refresh = existingRefresh || document.createElement('button');
-  if (!existingRefresh) { refresh.setAttribute('onclick', 'forceRefresh()'); refresh.textContent = '🔄'; refresh.title = 'Actualizar'; }
-  refresh.className = 'top-icon-btn';
-  if (!theme) { theme = document.createElement('button'); theme.id = 'themeToggle'; theme.setAttribute('onclick', 'toggleTheme()'); }
-  theme.className = 'top-icon-btn'; theme.style.cssText = '';
-  right.appendChild(refresh); right.appendChild(theme);
-}
-if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', setupTopButtons); } else { setupTopButtons(); }
-setTimeout(setupTopButtons, 500);
 function refreshAll() { renderUnclassified(); renderPostponed(); renderRouteView(); renderUnmarked(); renderDraft(); renderCancelledGroups(); renderRecentActivity(); renderDelivered(); updateCounts(); updateDashboardStats(); updateDeleteCounts(); }
 document.getElementById('dateInfo').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 updateGreeting();
