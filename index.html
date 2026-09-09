@@ -1053,7 +1053,7 @@ function renderRouteView() {
         return '<div class="route-card' + (su ? ' nogps' : '') + '">'
             + '<div style="display:flex;gap:8px;"><div style="flex:1;min-width:0;">'
             + '<div style="font-size:1rem;font-weight:800;color:var(--navy);">#' + (i + 1) + ' · ' + esc(p.client_name || 'Sin nombre') + (su ? ' <span style="font-size:.6rem;font-weight:800;padding:3px 8px;border-radius:20px;background:#fef3c7;color:#92400e;">SIN GPS</span>' : '') + (isNoAnswer ? ' <span style="font-size:.6rem;font-weight:800;padding:3px 8px;border-radius:20px;background:#fff3e0;color:#e65100;">NO CONTESTA</span>' : '') + '</div>'
-            + '<div style="font-size:.8rem;color:var(--gray-500);margin-top:3px;">📞 ' + esc(phN || '—') + (cv ? ' · RD$ ' + cv.toLocaleString() : '') + '</div>'
+            + '<div style="font-size:.8rem;color:var(--gray-500);margin-top:3px;">📞 ' + esc(phN || '—') + (cv ? ' · RD$ ' + cv.toLocaleString() : '') + ((isAdmin() || isDriver()) ? ' <button onclick="quickEditPhone(\'' + p.id + '\')" style="background:#F1F5F9;color:#334155;border:1px solid #E2E8F0;border-radius:8px;padding:2px 8px;font-size:.7rem;font-weight:800;cursor:pointer;margin-left:6px;">✏️ Editar</button>' : '') + '</div>'
             + '<div style="font-size:.8rem;color:var(--gray-500);">📦 Código: ' + esc(pkgCode) + '</div>'
             + '</div></div>'
             + (p.product_info ? '<div style="margin:8px 0;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:12px;padding:9px 11px;font-size:.8rem;color:var(--gray-700);">📝 ' + esc(p.product_info) + '</div>' : '')
