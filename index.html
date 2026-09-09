@@ -352,6 +352,10 @@ button { box-shadow:none; }
 .pkg-actions .btn-cancel, .pd-actions .btn-cancel { background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; }
 .pkg-actions .btn-secondary, .pd-actions .btn-secondary { background:#EFF6FF; color:#1D4ED8; border:1px solid #BFDBFE; }
 .pkg-actions .btn-ghost, .pd-actions .btn-ghost { background:#F1F5F9; color:#334155; border:1px solid #E2E8F0; }
+/* ===== NUMERACIÓN DE FICHAS (10.4) ===== */
+#dayList, #unclassList, #postponedList, #unmarkedList, #draftList { counter-reset: ficha; }
+#dayList .delivered-item, #unclassList .package-item, #postponedList .package-item, #unmarkedList .package-item, #draftList .package-item { position:relative; padding-left:56px; }
+#dayList .delivered-item::before, #unclassList .package-item::before, #postponedList .package-item::before, #unmarkedList .package-item::before, #draftList .package-item::before { counter-increment: ficha; content: counter(ficha); position:absolute; left:14px; top:16px; width:30px; height:30px; border-radius:10px; background:#FFF1E6; color:#C2410C; border:1px solid #FED7AA; font-weight:800; font-size:.85em; display:flex; align-items:center; justify-content:center; }
 </style>
 </head>
 <body>
