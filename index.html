@@ -1049,7 +1049,7 @@ function updateCounts() {
     const de = Object.values(deliveredGroups).reduce((s, a) => s + a.length, 0);
     const ca = cancelledDraft.length + cancelledGroups.reduce((s, g) => s + g.items.length, 0);
     const um = packages.filter(p => p.status === 'delivered_unmarked').length;
-    const route = packages.filter(p => (p.status === 'pending' || p.status === 'in_route') && p.assigned_to === currentUserEmail).length;
+    const route = packages.filter(p => (p.status === 'pending' || p.status === 'in_process' || p.status === 'in_transit') && p.assigned_to === currentUserEmail).length;
     document.getElementById('badgeUnclassified').textContent = un; document.getElementById('unclassifiedCount').textContent = un;
     document.getElementById('badgePostponed').textContent = po; document.getElementById('postponedCount').textContent = po;
     document.getElementById('badgeDelivered').textContent = de; document.getElementById('badgeCancelled').textContent = ca;
