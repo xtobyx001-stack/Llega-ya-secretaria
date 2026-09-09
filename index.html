@@ -584,7 +584,9 @@ button { box-shadow:none; }
 </div>
 </main>
 <div id="view-daydetail" class="view">
-<div class="detail-topbar"><button class="back-btn" onclick="backFromDay()">←</button><div><div class="detail-title" id="dayTitle">📅 Día</div><div class="detail-sub" id="daySub"></div></div></div>
+<div class="detail-topbar"><button class="back-btn" onclick="backFromDay()">←</button><select id="dayChoferSel" onchange="dayChofer=this.value;renderDayList()" style="flex:1;min-width:130px;border-radius:14px;"></select></div>
+<div style="max-width:860px;margin:0 auto 16px;"><div class="search-box" style="margin-bottom:0;"><span class="search-icon">🔍</span><input type="text" id="daySearch" placeholder="Buscar por código o teléfono..." oninput="renderDayList()"></div></div>
+<div style="display:none;"><span id="dayTitle"></span><span id="daySub"></span></div>
 <div class="day-summary" id="daySummary"></div>
 <div style="margin-bottom:16px;"><button class="btn-secondary" style="border-radius:14px;" onclick="openGroupDateEdit(currentDay)">📅 Cambiar Fecha del Día</button></div>
 <div id="dayList"></div>
