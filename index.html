@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Llega Ya - Gestión de Entregas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#FF6B00">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="https://image.qwenlm.ai/public_source/4a79ba76-7aca-46f1-ae9f-35cf48a90006/1927b28b2-443b-456c-9d01-b5f4ed5a3572.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/poppins@5.0.0/index.css">
@@ -381,6 +386,75 @@ button { box-shadow:none; }
 .delivered-item.cancelled-item { background:#ffffff; border:1px solid #FECACA; }
 .delivered-item.cancelled-item .pkg-code { color:#B91C1C; }
 .delivered-item.cancelled-item .badge-cancelled { background:#FEF2F2; color:#B91C1C; border:1px solid #FECACA; }
+/* ===== MODO OSCURO 2.0 ===== */
+body.dark { background:#0B1220; }
+body.dark .card, body.dark .import-section, body.dark .package-item, body.dark .delivered-item, body.dark .pd-card, body.dark .detail-topbar, body.dark .day-chip, body.dark .route-card, body.dark .recent-item, body.dark .team-item, body.dark .delete-option, body.dark .quick-action-btn, body.dark .modal { background:#111A2E; border-color:#1E293B; box-shadow:0 1px 2px rgba(0,0,0,.4); }
+body.dark .card h3, body.dark .topbar h2, body.dark .pkg-code, body.dark .detail-title, body.dark .stat-card .stat-number, body.dark .team-name, body.dark .do-title, body.dark .qa-title, body.dark .ri-title { color:#E2E8F0; }
+body.dark .pkg-info, body.dark .pkg-info strong, body.dark .detail-sub, body.dark .date-info, body.dark .ri-desc, body.dark .team-email, body.dark .do-desc, body.dark .qa-desc, body.dark .pd-label, body.dark label, body.dark .search-hint, body.dark .empty-state, body.dark .day-chip small { color:#94A3B8; }
+body.dark .pkg-info { background:#0B1220; border-color:#1E293B; }
+body.dark .pd-value { color:#E2E8F0; }
+body.dark .pd-row { border-bottom-color:#1E293B; }
+body.dark input, body.dark textarea, body.dark select { background:#0B1220; border-color:#1E293B; color:#E2E8F0; }
+body.dark input:focus, body.dark textarea:focus, body.dark select:focus { border-color:#FB923C; }
+body.dark .sidebar { background:#0B1220; box-shadow:0 0 0 1px #1E293B; }
+body.dark .brand h1, body.dark .nav-btn { color:#CBD5E1; }
+body.dark .nav-btn.active { background:#1E293B; color:#FB923C; }
+body.dark .nav-label { color:#475569; }
+body.dark .sidebar-header { border-bottom-color:#1E293B; }
+body.dark .sidebar-footer { background:#0B1220; border-top-color:#1E293B; color:#64748B; }
+body.dark .mode-indicator.admin { background:#7C2D12; color:#FED7AA; border-color:#9A3412; }
+body.dark .btn-ghost { background:#1E293B; color:#CBD5E1; }
+body.dark .date-group { background:#111A2E; border-color:#1E293B; }
+body.dark .date-group-header { background:#1E293B; }
+body.dark .date-group-header h3, body.dark .date-group-header h3 span { color:#E2E8F0; }
+body.dark .date-group-header .count-pill { background:#7C2D12; color:#FED7AA; }
+body.dark .welcome-banner { background:linear-gradient(135deg,#1E293B 0%,#0F172A 100%); }
+body.dark .stat-card { background:#111A2E; border-color:#1E293B; }
+body.dark .stat-card .stat-icon { background:#1E293B; }
+body.dark .stat-card .stat-tag { background:#1E293B; color:#94A3B8; }
+body.dark .stat-card .stat-label { color:#94A3B8; }
+body.dark .preview-table td { border-bottom-color:#1E293B; }
+body.dark .preview-table th { background:#7C2D12; }
+body.dark .mapping-section, body.dark .draft-section, body.dark .delete-summary { background:#0B1220; border-color:#1E293B; }
+body.dark .delete-summary li { color:#CBD5E1; }
+body.dark .login-screen { background:#0B1220; }
+body.dark .login-container { background:#111A2E; border:1px solid #1E293B; }
+body.dark .login-container h1 { color:#E2E8F0; }
+body.dark .login-subtitle { color:#94A3B8; }
+body.dark #themeToggle { background:#1E293B; border-color:#334155; color:#E2E8F0; }
+/* ===== BARRA INFERIOR MÓVIL ===== */
+.bottom-bar { display:none; }
+@media (max-width:768px) {
+.bottom-bar { display:flex; position:fixed; bottom:0; left:0; right:0; background:#fff; border-top:1px solid #E8EDF4; z-index:120; padding:6px 4px calc(6px + env(safe-area-inset-bottom)); justify-content:space-around; }
+.bb-btn { background:none; border:none; color:#64748B; font-size:.62rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; cursor:pointer; padding:4px 10px; border-radius:12px; box-shadow:none; }
+.bb-btn .bb-icon { font-size:1.3rem; }
+.bb-btn.active { color:#EA580C; background:#FFF1E6; }
+.main-content { padding-bottom:90px; }
+body.dark .bottom-bar { background:#0B1220; border-top-color:#1E293B; }
+body.dark .bb-btn { color:#94A3B8; }
+body.dark .bb-btn.active { color:#FB923C; background:#1E293B; }
+}
+/* ===== AJUSTES MODO OSCURO 16.1 ===== */
+body.dark [style*="var(--navy)"] { color:#E2E8F0 !important; }
+body.dark [style*="var(--gray-500)"] { color:#94A3B8 !important; }
+body.dark [style*="var(--gray-700)"] { color:#CBD5E1 !important; }
+body.dark [style*="background:#fff"] { background:#111A2E !important; }
+body.dark [style*="background:var(--gray-50)"] { background:#0B1220 !important; border-color:#1E293B !important; color:#CBD5E1 !important; }
+body.dark [style*="linear-gradient(135deg,#FFF5EB"] { background:#1E293B !important; }
+body.dark #view-route .tab { background:#111A2E !important; color:#94A3B8 !important; border-bottom-color:#1E293B !important; }
+body.dark #view-route .tab[style*="rgb(239, 246, 255)"] { background:#1E293B !important; color:#FB923C !important; }
+body.dark .route-header { background:#111A2E; border-color:#1E293B; }
+body.dark .route-card-loc, body.dark .pkg-location { background:#1E293B; border-color:#7C2D12; color:#FED7AA; }
+body.dark .pkg-store { background:#7C2D12; color:#FED7AA; border-color:#9A3412; }
+body.dark .back-btn { background:#1E293B; border-color:#334155; color:#E2E8F0; }
+body.dark .detail-value { color:#CBD5E1; }
+body.dark .file-input-label { background:#1E293B; border-color:#7C2D12; color:#FED7AA; }
+body.dark .preview-container { border-color:#1E293B; }
+body.dark .do-count { background:#1E293B; color:#94A3B8; }
+body.dark .search-icon { color:#94A3B8; }
+body.dark #mapWrapRoute { background:#0B1220; }
+body.dark .badge-delivered { background:#064E3B; color:#A7F3D0; }
+body.dark .badge-cancelled { background:#7F1D1D; color:#FECACA; }
 </style>
 </head>
 <body>
@@ -422,6 +496,7 @@ button { box-shadow:none; }
 <main class="main-content">
 <div class="topbar">
 <div style="display:flex;align-items:center;gap:12px;">
+<button class="menu-toggle" id="themeToggle" style="display:block;background:#fff;border:1px solid #E8EDF4;color:#0F172A;" onclick="toggleTheme()">🌙</button>
 <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
 <div><h2 id="viewTitle">🏠 Inicio</h2><div class="date-info" id="dateInfo"></div></div>
 </div>
@@ -712,6 +787,13 @@ button { box-shadow:none; }
 <button onclick="closeMRoute('mWARoute')" style="width:100%;margin-top:8px;padding:13px;background:var(--gray-100);color:var(--gray-700);border:none;border-radius:16px;font-weight:700;cursor:pointer;">Cancelar</button>
 </div>
 </div>
+<nav class="bottom-bar" id="bottomBar">
+<button class="bb-btn" onclick="switchView('home', event)"><span class="bb-icon">🏠</span><span class="bb-label">Inicio</span></button>
+<button class="bb-btn route-nav" onclick="switchView('route', event)"><span class="bb-icon">🚚</span><span class="bb-label">Ruta</span></button>
+<button class="bb-btn" onclick="switchView('delivered', event)"><span class="bb-icon">✅</span><span class="bb-label">Entregados</span></button>
+<button class="bb-btn" onclick="switchView('unclassified', event)"><span class="bb-icon">📥</span><span class="bb-label">Nuevos</span></button>
+<button class="bb-btn" onclick="toggleSidebar()"><span class="bb-icon">☰</span><span class="bb-label">Más</span></button>
+</nav>
 <div class="notification" id="notification"></div>
 <!-- ===== FIN PARTE 1/2 ===== -->
 <script>
@@ -1225,10 +1307,14 @@ document.getElementById('mEditPack').addEventListener('click', function(e) { if 
 async function saveEditPack() { const p = packages.find(x => x.id === editPackId); if (!p) return; const name = document.getElementById('epName').value.trim(); const phone = document.getElementById('epPhone').value.trim(); const product = document.getElementById('epProduct').value.trim(); const err = document.getElementById('epError'); if (!name || !phone || !product) { err.textContent = '❌ Cliente, teléfono y producto son obligatorios'; err.classList.add('show'); return; } const upd = { tracking_code: document.getElementById('epCode').value.trim() || p.tracking_code, client_name: name, client_phone: normalizePhone(phone), product_info: product, store: document.getElementById('epStore').value.trim(), zone: document.getElementById('epZone').value.trim(), client_address: document.getElementById('epAddress').value.trim(), price: document.getElementById('epPrice').value || p.price }; const { error } = await sb.from('packages').update(upd).eq('id', editPackId); if (error) { err.textContent = '❌ ' + error.message; err.classList.add('show'); return; } await sb.from('activity').insert({ texto: '✏️ Ficha editada #' + (p.tracking_code || p.code), usuario: currentUserName || currentUserEmail.split('@')[0] }); const pv = document.getElementById('view-packdetail'); const keepView = (pv && pv.classList.contains('active') && typeof openPackDetail === 'function') ? currentPackId : null; closeEditPack(); notify('✏️ Ficha actualizada'); await loadDataFromSupabase(); if (keepView) openPackDetail(keepView, packReturnView); }
 // ===== EDITAR NÚMERO RÁPIDO (EN RUTA) =====
 async function quickEditPhone(id) { const p = packages.find(x => x.id === id); if (!p) return; if (!isAdmin() && !isDriver()) { notify('🔒 No tienes permisos', 'error'); return; } const cur = p.client_phone || ''; const val = prompt('✏️ Escribe el número correcto de ' + (p.client_name || '') + ':', cur); if (val === null) return; const t = val.trim(); if (!t) { notify('❌ Número vacío', 'error'); return; } const { error } = await sb.from('packages').update({ client_phone: normalizePhone(t) }).eq('id', id); if (error) { notify('❌ ' + error.message, 'error'); return; } await sb.from('activity').insert({ texto: '✏️ Número corregido #' + (p.tracking_code || p.code) + ' → ' + normalizePhone(t), usuario: currentUserName || currentUserEmail.split('@')[0] }); notify('✏️ Número actualizado'); await loadDataFromSupabase(); }
+// ===== MODO OSCURO =====
+function applyTheme() { var t = localStorage.getItem('ly_theme') || 'light'; document.body.classList.toggle('dark', t === 'dark'); var b = document.getElementById('themeToggle'); if (b) b.textContent = (t === 'dark') ? '☀️' : '🌙'; }
+function toggleTheme() { var t = (localStorage.getItem('ly_theme') === 'dark') ? 'light' : 'dark'; localStorage.setItem('ly_theme', t); applyTheme(); }
 function refreshAll() { renderUnclassified(); renderPostponed(); renderRouteView(); renderUnmarked(); renderDraft(); renderCancelledGroups(); renderRecentActivity(); renderDelivered(); updateCounts(); updateDashboardStats(); updateDeleteCounts(); }
 document.getElementById('dateInfo').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 updateGreeting();
-checkSession();
+applyTheme(); checkSession();
+if ('serviceWorker' in navigator) { window.addEventListener('load', function() { navigator.serviceWorker.register('./sw.js').catch(function() {}); }); }
 </script>
 </body>
 </html>
