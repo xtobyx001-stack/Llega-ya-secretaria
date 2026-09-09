@@ -356,6 +356,10 @@ button { box-shadow:none; }
 #dayList, #unclassList, #postponedList, #unmarkedList, #draftList { counter-reset: ficha; }
 #dayList .delivered-item, #unclassList .package-item, #postponedList .package-item, #unmarkedList .package-item, #draftList .package-item { position:relative; padding-left:56px; }
 #dayList .delivered-item::before, #unclassList .package-item::before, #postponedList .package-item::before, #unmarkedList .package-item::before, #draftList .package-item::before { counter-increment: ficha; content: counter(ficha); position:absolute; left:14px; top:16px; width:30px; height:30px; border-radius:10px; background:#FFF1E6; color:#C2410C; border:1px solid #FED7AA; font-weight:800; font-size:.85em; display:flex; align-items:center; justify-content:center; }
+/* ===== NUMERACIÓN EN TODAS LAS LISTAS (10.5) ===== */
+#deliveredGroups .date-group, #cancelledGroups .date-group { counter-reset: ficha; }
+#deliveredGroups .delivered-item, #cancelledGroups .delivered-item { position:relative; padding-left:56px; }
+#deliveredGroups .delivered-item::before, #cancelledGroups .delivered-item::before { counter-increment: ficha; content: counter(ficha); position:absolute; left:14px; top:14px; width:30px; height:30px; border-radius:10px; background:#FFF1E6; color:#C2410C; border:1px solid #FED7AA; font-weight:800; font-size:.85em; display:flex; align-items:center; justify-content:center; }
 </style>
 </head>
 <body>
