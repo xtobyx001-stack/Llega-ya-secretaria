@@ -544,6 +544,16 @@ input:focus, textarea:focus, select:focus { background:#fff; border-color:#EA580
 </div>
 </div>
 </main>
+<div id="view-daydetail" class="view">
+<div class="detail-topbar"><button class="back-btn" onclick="backFromDay()">←</button><div><div class="detail-title" id="dayTitle">📅 Día</div><div class="detail-sub" id="daySub"></div></div></div>
+<div class="day-summary" id="daySummary"></div>
+<div style="margin-bottom:16px;"><button class="btn-secondary" style="border-radius:14px;" onclick="openGroupDateEdit(currentDay)">📅 Cambiar Fecha del Día</button></div>
+<div id="dayList"></div>
+</div>
+<div id="view-packdetail" class="view">
+<div class="detail-topbar"><button class="back-btn" onclick="backFromPack()">←</button><div><div class="detail-title" id="packTitle">📋 Ficha</div><div class="detail-sub" id="packSub"></div></div></div>
+<div class="pd-card" id="packBody"></div>
+</div>
 <div class="modal-overlay" id="clientModal"><div class="modal"><div class="modal-header"><h2 id="modalTitle">📋 Ficha</h2><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-body" id="modalBody"></div></div></div>
 <div class="modal-overlay" id="editDateModal"><div class="modal"><div class="modal-header"><h2>📅 Cambiar Fecha</h2><button class="modal-close" onclick="closeEditDateModal()">✕</button></div><div class="modal-body"><p id="editDateDesc" style="color:var(--gray-500);margin-bottom:12px;"></p><div class="form-group"><label>Nueva fecha *</label><input type="date" id="editDateInput"></div><div style="display:flex;gap:10px;"><button class="btn-deliver btn-full" onclick="confirmDateChange()">✓ Guardar</button><button class="btn-ghost btn-full" onclick="closeEditDateModal()">Cancelar</button></div></div></div></div>
 <div class="modal-overlay" id="saveGroupModal"><div class="modal"><div class="modal-header" style="background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);"><h2>💾 Guardar Grupo</h2><button class="modal-close" onclick="closeSaveGroupModal()">✕</button></div><div class="modal-body"><div class="form-group"><label>Fecha *</label><input type="date" id="groupDate"></div><p style="color:var(--gray-500);font-size:0.85em;margin-bottom:12px;">Se guardarán <strong id="groupCountPreview">0</strong> paquetes.</p><div style="display:flex;gap:10px;"><button class="btn-deliver btn-full" onclick="confirmSaveGroup()">✓ Confirmar</button><button class="btn-ghost btn-full" onclick="closeSaveGroupModal()">Cancelar</button></div></div></div></div>
