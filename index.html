@@ -480,6 +480,11 @@ body.dark .cq-row.cq-bad { background:#450a0a; border-color:#7f1d1d; }
 body.dark .cq-row.cq-warn { background:#451a03; border-color:#78350f; }
 body.dark .cq-row.cq-info { background:#172554; border-color:#1e3a8a; }
 body.dark .cq-body { color:#CBD5E1; }
+/* ===== CUADRE: POSICIÓN CORRECTA (19.1) ===== */
+#view-cuadre { flex:1 1 100%; width:100%; padding:0 25px 40px 305px; }
+@media (max-width:768px) { #view-cuadre { padding:0 15px 30px 15px; } }
+#view-cuadre > * { max-width:860px; margin-left:auto; margin-right:auto; }
+body:has(#view-cuadre.active) .main-content { min-height:auto; padding-bottom:0; }
 </style>
 </head>
 <body>
