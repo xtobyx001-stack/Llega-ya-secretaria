@@ -725,7 +725,6 @@ body:has(#view-cuadre.active) .main-content { min-height:auto; padding-bottom:0;
 </main>
 <div id="view-cuadre" class="view admin-only">
 <div class="card">
-<h3>🧾 Cuadre de Chofer</h3>
 <p style="color:var(--gray-500);font-size:.85em;margin-bottom:12px;">Sube el cuadre (PDF o Excel) tal como te lo envían y compáralo con el grupo de Entregados del día que elijas. Lo que te estén cobrando y NO esté marcado como entregado exitoso se resalta en rojo.</p>
 <div class="form-group"><label>Comparar con entregados del día:</label><select id="cuadreDaySel" onchange="cuadreDay=this.value; if(cuadreRows.length) renderCuadreResults();"></select></div>
 <div class="file-input-wrapper"><input type="file" id="cuadreFile" accept=".pdf,.xlsx,.xls,.csv" onchange="loadCuadreFile(event)"><label for="cuadreFile" class="file-input-label"><div class="icon">🧾</div><div>Toca y elige el cuadre (PDF o Excel)</div><div class="file-name" id="cuadreFileName"></div></label></div>
