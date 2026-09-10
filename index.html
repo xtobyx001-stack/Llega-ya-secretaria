@@ -1446,7 +1446,7 @@ else { if (!cuadreRows.length) { notify('Sube un cuadre primero','warning'); ret
 const { error } = await sb.from('cuadres').insert({ fecha_target: fecha, file_name: cuadreMeta.file || 'cuadre', chofer: cuadreMeta.chofer || '', total_filas: filas, total_cod: codSum, tipo: tipo, rows: rowsSrc, created_by: currentUserEmail });
 if (error) { notify('❌ Al guardar: '+error.message,'error'); return; }
 await sb.from('activity').insert({ texto: '💾 Cuadre guardado ('+tipo+') '+fecha, usuario: currentUserName || 'admin' }); notify('💾 Cuadre guardado como ficha'); renderCuadreSaved(); }
-function refreshAll() {
+function refreshAll() { if (document.getElementById('cuadreDaySel')) populateCuadreDaySel(); } catch (e) {} renderUnclassified(); renderPostponed(); renderRouteView(); renderUnmarked(); renderDraft(); renderCancelledGroups(); renderRecentActivity(); renderDelivered(); updateCounts(); updateDashboardStats(); updateDeleteCounts(); } 
 document.getElementById('dateInfo').textContent = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 updateGreeting();
 Array.prototype.forEach.call(document.body.childNodes, function(n){ if (n.nodeType === 3 && n.textContent.replace(/\s/g,'') !== '') { n.parentNode.removeChild(n); } });
