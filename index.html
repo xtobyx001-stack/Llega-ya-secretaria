@@ -485,6 +485,9 @@ body.dark .cq-body { color:#CBD5E1; }
 @media (max-width:768px) { #view-cuadre { padding:0 15px 30px 15px; } }
 #view-cuadre > * { max-width:860px; margin-left:auto; margin-right:auto; }
 body:has(#view-cuadre.active) .main-content { min-height:auto; padding-bottom:0; }
+/* ===== FIX: SALIR VISIBLE EN MÓVIL ===== */
+.sidebar { z-index:130; }
+.overlay { z-index:125; }
 </style>
 </head>
 <body>
