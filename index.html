@@ -737,20 +737,6 @@ body.dark .cq-body{color:#CBD5E1;}
 </div>
 </div>
 </main>
-<div id="view-cuadre" class="view admin-only">
-<div class="card">
-<h3>🧾 Cuadre de Chofer</h3>
-<p style="color:var(--gray-500);font-size:.85em;margin-bottom:12px;">Sube el cuadre (PDF o Excel) tal como te lo envían y compáralo con el grupo de Entregados del día que elijas. Lo que te estén cobrando y NO esté marcado como entregado exitoso se resalta en rojo.</p>
-<div class="form-group"><label>Comparar con entregados del día:</label><select id="cuadreDaySel" onchange="cuadreDay=this.value; if(cuadreRows.length) renderCuadreResults();"></select></div>
-<div class="file-input-wrapper"><input type="file" id="cuadreFile" accept=".pdf,.xlsx,.xls,.csv" onchange="loadCuadreFile(event)"><label for="cuadreFile" class="file-input-label"><div class="icon">🧾</div><div>Toca y elige el cuadre (PDF o Excel)</div><div class="file-name" id="cuadreFileName"></div></label></div>
-<div class="day-summary" id="cuadreSummary" style="margin-top:14px;"></div>
-<div style="display:flex;gap:10px;margin:10px 0 16px;"><button class="btn-deliver" onclick="saveCuadre()">💾 Guardar cuadre como ficha</button></div>
-<div id="cuadreResults"></div>
-<h3 style="margin:22px 0 10px;">📚 Cuadres guardados</h3>
-<div id="cuadreSaved"></div>
-</div>
-</div>
-<div id="view-cuadre" class="view admin-only">
 <div class="card"><h3>🧾 Comparar cuadre del día</h3>
 <p style="color:var(--gray-500);font-size:.85em;margin-bottom:12px;">Sube el cuadre (PDF o Excel) tal como te lo envían y compáralo con un día de Entregados. Lo que te cobren y NO esté marcado como entregado exitoso sale en rojo.</p>
 <div class="form-group"><label>Día a comparar</label><select id="cuadreDaySel" onchange="cuadreDay=this.value; if(cuadreRows.length) renderCuadreResults();"></select></div>
