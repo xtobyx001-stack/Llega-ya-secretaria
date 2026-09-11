@@ -1379,7 +1379,7 @@ function toggleTheme() { var t = (localStorage.getItem('ly_theme') === 'dark') ?
 function forceRefresh() { notify('🔄 Actualizando...'); if (navigator.serviceWorker && navigator.serviceWorker.getRegistration) { navigator.serviceWorker.getRegistration().then(function(reg) { if (reg) reg.update(); setTimeout(function() { location.reload(); }, 300); }).catch(function() { location.reload(); }); } else { location.reload(); } }
 // ===== INSTALACIÓN PWA (DESCARGAR APP) =====
 let deferredInstallPrompt = null;
-window.addEventListener('beforeinstallprompt', function(e) { e.preventDefault(); deferredInstallPrompt = e; });
+window.addEventListener('beforeinstallprompt', function(e) { window.__bip = e; deferredInstallPrompt = e; });
 window.addEventListener('appinstalled', function() { deferredInstallPrompt = null; notify('✅ App instalada en tu pantalla'); });
 function openInstallModal() { document.getElementById('installSteps').style.display = 'none'; document.getElementById('installSteps').innerHTML = ''; var st = document.getElementById('installStatus'); var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true; st.innerHTML = standalone ? '✅ Ya estás usando la app instalada en este celular.' : (deferredInstallPrompt ? '🟢 Instalación rápida disponible: toca tu sistema abajo.' : 'ℹ️ Toca tu sistema y sigue los pasos que aparecen.'); document.getElementById('mInstall').classList.add('show'); }
 function closeInstallModal() { document.getElementById('mInstall').classList.remove('show'); }
