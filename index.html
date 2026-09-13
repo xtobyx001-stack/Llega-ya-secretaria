@@ -1025,7 +1025,7 @@ function applyModeUI() {
     document.querySelectorAll('.route-nav').forEach(el => { el.style.display = (userMode === 'viewer') ? 'none' : ''; });
 }
 async function loadDataFromSupabase() {
-    const res = await Promise.all([sb.from('packages').select('*').order('created_at', { ascending: false }).order('id', { ascending: true }), sb.from('activity').select('*').order('created_at', { ascending: false }).limit(20), sb.from('team').select('*').order('created_at', { ascending: false }), sb.from('location_hints').select('*')]);
+    const res = await Promise.all([sb.from('packages').select('*').order('created_at', { ascending: false }).order('id', { ascending: true }).limit(10000), sb.from('activity').select('*').order('created_at', { ascending: false }).limit(20), sb.from('team').select('*').order('created_at', { ascending: false }), sb.from('location_hints').select('*')]);
 if (res[0].data) packages = res[0].data; if (res[1].data) recentActivity = res[1].data; if (res[2].data) teamUsers = res[2].data; if (res[3].data) locationHints = res[3].data;
 rebuildLocalGroups(); refreshAll(); populateRouteAdminSelect();
 }
