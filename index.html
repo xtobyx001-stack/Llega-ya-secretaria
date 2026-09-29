@@ -622,6 +622,7 @@ body * { visibility:hidden; }
 </div>
 </div>
 <div class="card"><h3>📦 Paquetes Pendientes <span id="unclassifiedCount" style="background:var(--orange);color:var(--white);padding:2px 10px;border-radius:12px;font-size:0.8em;margin-left:auto;">0</span></h3>
+<div style="margin-bottom:12px;"><button class="btn-secondary" onclick="openManualPack()">➕ Crear ficha manual</button></div>
 <div class="search-box"><span class="search-icon">🔍</span><input type="text" id="searchUnclassified" placeholder="Buscar por código, cliente, teléfono..." oninput="renderUnclassified()"></div>
 <div class="package-list" id="unclassList"></div>
 </div>
@@ -846,9 +847,9 @@ body * { visibility:hidden; }
 <div class="modal-body">
 <p style="color:var(--gray-500);font-size:0.85em;margin-bottom:12px;">Pega las coordenadas y describe las calles. La app aprenderá esta ubicación para sugerirla en fichas cercanas.</p>
 <div class="form-group"><label>Coordenadas *</label><input type="text" id="locCoords" placeholder="Ej: 19.2917, -70.2558" oninput="maybeFillHint()"></div>
-<div class="form-group"><label>Calle principal *</label><input type="text" id="locMain" placeholder="Ej: Emilio Prud Homme"></div>
-<div class="form-group"><label>Entre calle lateral 1 *</label><input type="text" id="locSide1" placeholder="Ej: Cristino Zeno"></div>
-<div class="form-group"><label>Y calle lateral 2 *</label><input type="text" id="locSide2" placeholder="Ej: Calle 3"></div>
+<div class="form-group"><label>Calle principal (opcional)</label><input type="text" id="locMain" placeholder="Ej: Emilio Prud Homme"></div>
+<div class="form-group"><label>Entre calle lateral 1 (opcional)</label><input type="text" id="locSide1" placeholder="Ej: Cristino Zeno"></div>
+<div class="form-group"><label>Y calle lateral 2 (opcional)</label><input type="text" id="locSide2" placeholder="Ej: Calle 3"></div>
 <div class="form-group"><label>Punto de referencia (opcional)</label><textarea id="locRef" placeholder="Ej: Frente al colmado mercedes"></textarea></div>
 <div class="password-error" id="locError"></div>
 <div style="display:flex;gap:10px;margin-top:15px;"><button class="btn-deliver btn-full" onclick="saveLocRoute()">💾 Guardar ubicación</button><button class="btn-ghost btn-full" onclick="closeLocRoute()">Cancelar</button></div>
@@ -1315,8 +1316,8 @@ async function saveLocRoute() {
     var p = packages.find(x => x.id === locTarget); if (!p) return; var c = parseCoords(document.getElementById('locCoords').value); var err = document.getElementById('locError');
     var main = document.getElementById('locMain').value.trim(); var side1 = document.getElementById('locSide1').value.trim(); var side2 = document.getElementById('locSide2').value.trim(); var ref = document.getElementById('locRef').value.trim();
     if (!c) { err.textContent = '❌ Coordenadas inválidas. Usa el formato: 19.2917, -70.2558'; err.classList.add('show'); return; }
-    if (!main || !side1 || !side2) { err.textContent = '❌ Completa la calle principal y las 2 calles laterales'; err.classList.add('show'); return; }
-    var addr = p.client_address || ''; var coordStr = c.lat + ', ' + c.lng; var desc = 'Calle ' + main + ' entre ' + side1 + ' y ' + side2 + (ref ? '\n' + ref : ''); var ok = false;
+    // calles opcionales: ya no se exige completarlas
+    var addr = p.client_address || ''; var coordStr = c.lat + ', ' + c.lng; var streetParts = []; if (main) streetParts.push('Calle ' + main); if (side1 && side2) streetParts.push('entre ' + side1 + ' y ' + side2); else if (side1) streetParts.push('esq. ' + side1); else if (side2) streetParts.push('esq. ' + side2); var desc = streetParts.join(' ') + (ref ? (streetParts.length ? '\n' : '') + ref : ''); var ok = false;
     var r1 = await sb.from('packages').update({ lat: c.lat, lng: c.lng, client_address: addr || coordStr, force_sin_gps: false, street_main: main, street_side1: side1, street_side2: side2, location_ref: ref || null, location_desc: desc }).eq('id', p.id);
     if (!r1.error) { ok = true; } else { var r2 = await sb.from('packages').update({ client_address: coordStr + (addr ? ' | ' + addr : ''), street_main: main, street_side1: side1, street_side2: side2, location_ref: ref || null, location_desc: desc }).eq('id', p.id); ok = !r2.error; if (!ok) { notify('Error al guardar: ' + r2.error.message, 'error'); return; } }
     await saveLocationHint(c.lat, c.lng, main, side1, side2, ref); await savePhoneLocation(p.client_phone, c.lat, c.lng, coordStr, main, side1, side2, ref);
